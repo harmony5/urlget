@@ -5,20 +5,20 @@ import sys
 
 
 def f_save(filename, content, binary=True):
-    """Creates a new file named filename."""
+    """Creates a new file."""
 
     mode = 'w'
     if binary:
         mode = 'wb'
 
     with open(filename, mode) as file:
-        b = file.write(content)
+        buf = file.write(content)
 
-    return b
+    return buf
 
 
 def urlread(url):
-    """Return the contents of a url. Raises IOError if couldn't read url."""
+    """Return the contents of a url. Raises IOError."""
     try:
         urlfile = urllib.request.urlopen(url)
         return urlfile.read()
@@ -36,8 +36,8 @@ def webget(url, name=None):
     if name:
         filename = name
 
-    b = f_save(filename, urlfile.read())
-    return b
+    buf = f_save(filename, urlfile.read())
+    return buf
 
 
 if __name__ == '__main__':
@@ -73,9 +73,9 @@ if __name__ == '__main__':
             os.chdir(path)
 
         if name:
-            print("Retrieveing url '{}' to file '{}'".format(url, name))
+            print(f"Retrieveing url '{url}' to file '{name}'")
             webget(url, name)
         else:
-            print("Retrieving url '{}'".format(url))
+            print(f"Retrieving url '{url}'")
             webget(url)
     main()
