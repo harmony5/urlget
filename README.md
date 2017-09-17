@@ -1,2 +1,2 @@
 # urlget
-Download a file from the internet
+Utility to download a file from the internet.
